@@ -1,34 +1,23 @@
-package com.mboukhlouf.passwordmanager.domain.entities;
+package com.mboukhlouf.passwordmanager.application.passwords.queries.GetUserPasswords;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "passwords")
-public class Password {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+public class UserPasswordDto {
     private Integer id;
-    
     private String label;
-    
     private String account;
-
     private String password;
-
     private String url;
-
     private String tags;
+    private Integer userId;
 
-    @ManyToOne
-    private User user;
-
-    public Password() {
-
+    public UserPasswordDto(Integer id, String label, String account, String password, String url, String tags,
+            Integer userId) {
+        this.id = id;
+        this.label = label;
+        this.account = account;
+        this.password = password;
+        this.url = url;
+        this.tags = tags;
+        this.userId = userId;
     }
 
     /**
@@ -116,17 +105,16 @@ public class Password {
     }
 
     /**
-     * @return User return the user
+     * @return Integer return the userId
      */
-    public User getUser() {
-        return user;
+    public Integer getUserId() {
+        return userId;
     }
 
     /**
-     * @param user the user to set
+     * @param userId the userId to set
      */
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
-
 }

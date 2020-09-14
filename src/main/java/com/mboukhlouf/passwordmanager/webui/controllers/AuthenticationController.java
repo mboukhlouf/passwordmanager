@@ -1,7 +1,6 @@
-package com.mboukhlouf.passwordmanager.webui;
+package com.mboukhlouf.passwordmanager.webui.controllers;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
 
 import com.mboukhlouf.passwordmanager.application.authentication.commands.authenticateuser.AuthenticateUserCommand;
 import com.mboukhlouf.passwordmanager.application.authentication.commands.registeruser.RegisterUserCommand;
@@ -15,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequestMapping(value = "authentication")
@@ -38,22 +36,21 @@ public class AuthenticationController {
         return "authentication/login";
     }
 
-    @RequestMapping(value = "login", method = RequestMethod.POST)
-    @ResponseBody
+    @RequestMapping(value = {"login", ""}, method = RequestMethod.POST)
     public String loginPost(@RequestParam String username, @RequestParam String password, 
     HttpServletRequest request) throws Exception {
         if(currentUserService.isAuthenticated()) {
             return "redirect:/passwords";
         }
 
-        UserDto user = mediator.Send(new AuthenticateUserCommand(username, password));
+        UserDto user = mediator.send(new AuthenticateUserCommand(username, password));
         if(user == null) {
-            return "redirect:authentication/login";
+            return "redirect:/authentication/login";
         }
         request.getSession().setAttribute("id", user.getId());
         request.getSession().setAttribute("username", username);
         request.getSession().setAttribute("password", password);
-        return user.getUsername() + " " + user.getId();
+        return "redirect:/passwords";
     }
 
     @RequestMapping(value = "register")
@@ -65,14 +62,19 @@ public class AuthenticationController {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    @ResponseBody
-    public String regsiterPost(@RequestParam String username, @RequestParam String password, 
+    public String registerPost(@RequestParam String username, @RequestParam String password, 
     @RequestParam String confirmPassword, 
     HttpServletRequest request) throws Exception {
         if(currentUserService.isAuthenticated()) {
             return "redirect:/passwords";
         }
-        mediator.Send(new RegisterUserCommand(username, password));
-        return "Registered successfully";   
+        mediator.send(new RegisterUserCommand(username, password));
+        return "redirect:/authentication/login";
+    }
+
+    @RequestMapping(value = "logout")
+    public String logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return "redirect:/authentication/login";
     }
 }

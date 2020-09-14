@@ -78,4 +78,11 @@ public class User {
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
+
+    /**
+     * @return List<Password> return the passwords
+     */
+    public List<Password> getPasswords() {
+        return passwords;
+    }
 }
