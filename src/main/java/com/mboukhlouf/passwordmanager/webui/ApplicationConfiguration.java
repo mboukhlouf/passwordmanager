@@ -2,10 +2,12 @@ package com.mboukhlouf.passwordmanager.webui;
 
 import com.mboukhlouf.passwordmanager.application.authentication.commands.authenticateuser.*;
 import com.mboukhlouf.passwordmanager.application.authentication.commands.registeruser.*;
+import com.mboukhlouf.passwordmanager.application.common.abstractions.services.ICurrentUserService;
 import com.mboukhlouf.passwordmanager.application.common.abstractions.services.PasswordHasher;
 import com.mboukhlouf.passwordmanager.application.jmediatr.Mediator;
 import com.mboukhlouf.passwordmanager.infrastructure.services.BCryptHasher;
 import com.mboukhlouf.passwordmanager.persistence.repositories.UserRepository;
+import com.mboukhlouf.passwordmanager.webui.services.CurrentUserService;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -36,5 +38,10 @@ public class ApplicationConfiguration {
         RegisterUserCommandHandler handler = new RegisterUserCommandHandler(userRepository, passwordHasher);
         Mediator.AddRequest(RegisterUserCommand.class, handler);
         return handler;
+    }
+
+    @Bean
+    public ICurrentUserService currentUserService() {
+        return new CurrentUserService();
     }
 }
