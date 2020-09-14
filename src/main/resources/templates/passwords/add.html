@@ -44,8 +44,11 @@
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault">
     <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/passwords/">Home</a>
+      </li>
       <li class="nav-item active">
-        <a class="nav-link" href="">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="/passwords/add">Add password</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/authentication/logout">Logout</a>
@@ -57,13 +60,31 @@
   </div>
 </nav>
 
-<main role="main" class="container">
-
-  <div class="starter-template">
-    <h1>Bootstrap starter template</h1>
-    <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a mostly barebones HTML document.</p>
-  </div>
-
+<main role="main" class="container">*
+    <h1>Add Password</h1>
+    <form method="post">
+        <div class="form-group">
+          <label for="labelInput">Label</label>
+          <input type="text" name="label" class="form-control" id="labelInput" placeholder="Enter label">
+        </div>
+        <div class="form-group">
+            <label for="accountInput">Account</label>
+            <input type="text" name="account" class="form-control" id="accountInput" placeholder="Enter account">
+        </div>
+        <div class="form-group">
+            <label for="passwordInput">Password</label>
+            <input type="text" name="password" class="form-control" id="passwordInput" placeholder="Enter password">
+        </div>
+        <div class="form-group">
+            <label for="urlInput">Url</label>
+            <input type="text" name="url" class="form-control" id="urlInput" placeholder="Enter url">
+        </div>
+        <div class="form-group">
+            <label for="tagsInput">Tags</label>
+            <input type="text" name="tags" class="form-control" id="tagsInput" placeholder="Enter tags">
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
 </main><!-- /.container -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
       <script>window.jQuery || document.write('<script src="/docs/4.5/assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="/docs/4.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous"></script></body>
