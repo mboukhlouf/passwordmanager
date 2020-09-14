@@ -13,7 +13,7 @@ public class Mediator {
         requestHandlers.put(requestType, handler);
     }
 
-    public <TResponse> TResponse Send(Request<TResponse> request)
+    public <TResponse> TResponse Send(Request<TResponse> request) throws Exception
     {
         if(request == null) {
             throw new IllegalArgumentException();
